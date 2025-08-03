@@ -1,0 +1,83 @@
+{
+  "auto_check_settings": {
+    "terms_agreement": {
+      "enabled": true,
+      "auto_check_all": true,
+      "required_checks": [
+        "privacy_policy",
+        "terms_of_service",
+        "data_collection",
+        "third_party_sharing"
+      ]
+    },
+    "center_selection": {
+      "enabled": true,
+      "auto_select": true,
+      "preferred_centers": [
+        "gwanghwamun",
+        "embassy"
+      ],
+      "fallback_centers": [
+        "embassy"
+      ]
+    },
+    "service_selection": {
+      "enabled": true,
+      "auto_select": true,
+      "preferred_services": [
+        "drivers_license",
+        "passport",
+        "id_card"
+      ]
+    },
+    "date_time_selection": {
+      "enabled": true,
+      "auto_select": true,
+      "flexible_dates": true,
+      "flexible_times": true,
+      "max_date_range": 30,
+      "time_slots": {
+        "morning": ["09:00", "10:00", "11:00"],
+        "afternoon": ["14:00", "15:00", "16:00"]
+      }
+    },
+    "applicant_info": {
+      "enabled": true,
+      "auto_fill": true,
+      "required_fields": [
+        "name",
+        "name_english",
+        "phone",
+        "email",
+        "id_type",
+        "id_number"
+      ],
+      "optional_fields": [
+        "birth_date",
+        "nationality",
+        "address",
+        "emergency_contact"
+      ]
+    },
+    "confirmation": {
+      "enabled": true,
+      "auto_confirm": false,
+      "require_user_confirmation": true,
+      "show_summary": true
+    }
+  },
+  "validation_rules": {
+    "phone_format": "^01[0-9]-[0-9]{4}-[0-9]{4}$",
+    "email_format": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+    "id_number_format": {
+      "passport": "^[A-Z][0-9]{8}$",
+      "residence_card": "^F-4-[0-9]{9}$"
+    }
+  },
+  "error_handling": {
+    "retry_on_validation_error": true,
+    "max_validation_retries": 3,
+    "show_validation_errors": true,
+    "log_validation_errors": true
+  }
+} 
