@@ -1,0 +1,108 @@
+# G4K 방문예약 자동화 시스템 설정 파일
+
+# 시스템 설정
+system:
+  browser:
+    headless: false  # 사용자 로그인을 위해 GUI 모드 사용
+    timeout: 30
+    window_size: "1920x1080"
+    
+  retry:
+    max_attempts: 5
+    base_delay: 1
+    max_delay: 20
+    
+  logging:
+    level: INFO
+    file_path: "g4k_automation.log"
+    max_file_size: "10MB"
+    backup_count: 5
+
+# 네트워크 설정
+network:
+  response_time_threshold: 10.0  # 서버 과부하 판단 기준 (초)
+  error_rate_threshold: 0.3      # 오류율 임계값
+  connection_timeout: 30
+  read_timeout: 60
+
+# 사용자 프로필
+user_profiles:
+  default:
+    name: "홍길동"
+    name_english: "Hong Gildong"
+    phone: "010-1234-5678"
+    email: "user@example.com"
+    id_type: "passport"
+    id_number: "M12345678"
+
+# 예약 설정
+reservation_settings:
+  center_type: "gwanghwamun"  # gwanghwamun 또는 embassy
+  service_type: "drivers_license"
+  service_detail: "renewal"  # renewal 또는 reissue
+  
+  # 희망 날짜 (우선순위 순)
+  preferred_dates:
+    - "2024-01-15"
+    - "2024-01-16"
+    - "2024-01-17"
+    - "2024-01-18"
+    - "2024-01-19"
+  
+  # 희망 시간 (우선순위 순)
+  preferred_times:
+    - "09:00"
+    - "10:00"
+    - "11:00"
+    - "14:00"
+    - "15:00"
+    - "16:00"
+  
+  # 자동 재시도 설정
+  auto_retry:
+    enabled: true
+    interval_minutes: 30
+    max_retries: 10
+    retry_on_failure: true
+
+# 알림 설정
+notifications:
+  email:
+    enabled: false
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    username: "your_email@gmail.com"
+    password: "your_app_password"
+    recipient: "your_email@gmail.com"
+  
+  desktop:
+    enabled: true
+    sound: true
+
+# 보안 설정
+security:
+  session_timeout: 1800  # 30분
+  max_login_wait_time: 300  # 5분
+  clear_session_on_exit: true
+  
+# 성능 설정
+performance:
+  max_memory_usage: "2GB"
+  cpu_limit_percent: 50
+  page_load_strategy: "normal"  # normal, eager, none
+  
+  # 리소스 차단 설정
+  block_resources:
+    images: true
+    css: false
+    javascript: false
+    fonts: true
+    media: true
+
+# 디버그 설정
+debug:
+  screenshot_on_error: true
+  save_page_source: false
+  verbose_logging: false
+  step_by_step_mode: false
+

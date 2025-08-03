@@ -1,0 +1,64 @@
+# G4K 방문예약 자동화 시스템 필수 패키지
+
+# 웹 자동화
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+
+# 웹 스크래핑 및 파싱
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+requests>=2.31.0
+
+# 데이터 처리
+pandas>=2.0.0
+numpy>=1.24.0
+
+# 설정 파일 처리
+PyYAML>=6.0.0
+configparser>=5.3.0
+
+# 로깅 및 모니터링
+colorlog>=6.7.0
+psutil>=5.9.0
+
+# 스케줄링
+APScheduler>=3.10.0
+
+# 이미지 처리 (보안문자 처리용, 선택사항)
+Pillow>=10.0.0
+opencv-python>=4.8.0
+pytesseract>=0.3.10
+
+# 암호화 및 보안
+cryptography>=41.0.0
+bcrypt>=4.0.0
+
+# 알림 기능
+plyer>=2.1.0  # 데스크톱 알림
+# smtplib은 Python 내장 모듈이므로 별도 설치 불필요
+
+# 네트워크 및 HTTP
+urllib3>=2.0.0
+certifi>=2023.7.22
+
+# 유틸리티
+python-dateutil>=2.8.0
+pytz>=2023.3
+click>=8.1.0  # CLI 인터페이스용
+
+# GUI 및 웹 인터페이스
+# tkinter은 Python 내장 모듈이므로 별도 설치 불필요
+flask>=2.3.0  # 웹 대시보드
+flask-cors>=4.0.0  # CORS 지원
+jinja2>=3.1.0  # 템플릿 엔진
+# webbrowser은 Python 내장 모듈이므로 별도 설치 불필요
+
+# 개발 및 테스트 (선택사항)
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.7.0
+flake8>=6.0.0
+
+# 타입 힌팅
+typing-extensions>=4.7.0
+

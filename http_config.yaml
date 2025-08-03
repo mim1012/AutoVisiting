@@ -1,0 +1,226 @@
+# G4K HTTP 직접 요청 자동화 시스템 설정 파일
+
+# 시스템 설정
+system:
+  base_url: "https://www.g4k.go.kr"
+  timeout: 30
+  max_retries: 5
+  retry_delay: [1, 2, 5, 10, 20]  # 지수 백오프 지연 시간
+  
+  # 세션 관리
+  session:
+    validation_interval: 300  # 5분마다 세션 유효성 검증
+    auto_refresh: true
+    max_idle_time: 1800  # 30분 비활성 시 세션 만료
+    
+  # 로깅 설정
+  logging:
+    level: INFO
+    file_path: "g4k_http_automation.log"
+    max_file_size: "10MB"
+    backup_count: 5
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# HTTP 요청 설정
+http:
+  headers:
+    user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+    accept_language: "ko-KR,ko;q=0.9,en;q=0.8"
+    accept_encoding: "gzip, deflate, br"
+    connection: "keep-alive"
+    
+  # 요청 제한
+  rate_limiting:
+    requests_per_minute: 30
+    burst_limit: 10
+    cooldown_period: 60
+    
+  # SSL/TLS 설정
+  ssl:
+    verify_certificates: true
+    min_tls_version: "1.2"
+    cipher_suites: ["ECDHE-RSA-AES256-GCM-SHA384", "ECDHE-RSA-AES128-GCM-SHA256"]
+
+# API 엔드포인트 매핑
+endpoints:
+  main: "/biz/main/main.do"
+  login: "/biz/login/loginProc.do"
+  
+  # 광화문 센터
+  gwanghwamun:
+    main: "/biz/visit/gwanghwamun/main.do"
+    terms: "/biz/visit/gwanghwamun/terms.do"
+    select_service: "/biz/visit/gwanghwamun/selectService.do"
+    select_datetime: "/biz/visit/gwanghwamun/selectDateTime.do"
+    applicant_info: "/biz/visit/gwanghwamun/applicantInfo.do"
+    submit: "/biz/visit/gwanghwamun/submit.do"
+    
+  # 재외공관
+  embassy:
+    main: "/biz/visit/embassy/main.do"
+    terms: "/biz/visit/embassy/terms.do"
+    select_service: "/biz/visit/embassy/selectService.do"
+    select_datetime: "/biz/visit/embassy/selectDateTime.do"
+    applicant_info: "/biz/visit/embassy/applicantInfo.do"
+    submit: "/biz/visit/embassy/submit.do"
+    
+  # AJAX API
+  api:
+    available_dates: "/api/visit/available-dates"
+    available_times: "/api/visit/available-times"
+    check_availability: "/api/visit/check-availability"
+    validate_info: "/api/visit/validate-info"
+
+# 서비스 코드 매핑
+service_codes:
+  drivers_license: "DL001"
+  passport: "PP001"
+  id_card: "ID001"
+  certificate: "CT001"
+  family_register: "FR001"
+  residence_certificate: "RC001"
+
+# 사용자 프로필
+user_profiles:
+  default:
+    name: "홍길동"
+    name_english: "Hong Gildong"
+    phone: "010-1234-5678"
+    email: "hong@example.com"
+    id_type: "passport"
+    id_number: "M12345678"
+    birth_date: "1990-01-01"
+    nationality: "KR"
+    address: "서울특별시 강남구"
+
+# 예약 설정
+reservation:
+  center_type: "gwanghwamun"  # gwanghwamun 또는 embassy
+  service_type: "drivers_license"
+  
+  # 희망 날짜 (우선순위 순)
+  preferred_dates:
+    - "2024-01-15"
+    - "2024-01-16"
+    - "2024-01-17"
+    - "2024-01-18"
+    - "2024-01-19"
+  
+  # 희망 시간 (우선순위 순)
+  preferred_times:
+    - "09:00"
+    - "10:00"
+    - "11:00"
+    - "14:00"
+    - "15:00"
+    - "16:00"
+  
+  # 자동 재시도 설정
+  auto_retry:
+    enabled: true
+    max_attempts: 10
+    interval_minutes: 30
+    retry_on_failure: true
+    stop_on_success: true
+
+# 보안 설정
+security:
+  # 세션 보안
+  session_encryption:
+    enabled: true
+    algorithm: "AES-256-GCM"
+    key_rotation_interval: 3600  # 1시간마다 키 교체
+    
+  # 개인정보 보호
+  privacy:
+    data_encryption: true
+    auto_delete_after_hours: 24
+    log_personal_info: false
+    anonymize_logs: true
+    
+  # 접근 제어
+  access_control:
+    max_concurrent_sessions: 1
+    session_timeout: 1800  # 30분
+    failed_login_lockout: 300  # 5분
+    
+  # 감사 로그
+  audit:
+    enabled: true
+    log_all_requests: true
+    log_responses: false  # 개인정보 포함 가능성으로 비활성화
+    retention_days: 90
+
+# 모니터링 설정
+monitoring:
+  # 성능 모니터링
+  performance:
+    response_time_threshold: 10.0  # 초
+    error_rate_threshold: 0.1  # 10%
+    memory_usage_threshold: 0.8  # 80%
+    
+  # 알림 설정
+  alerts:
+    email:
+      enabled: false
+      smtp_server: "smtp.gmail.com"
+      smtp_port: 587
+      username: "your_email@gmail.com"
+      password: "your_app_password"
+      recipients: ["admin@example.com"]
+      
+    desktop:
+      enabled: true
+      sound: true
+      
+    webhook:
+      enabled: false
+      url: "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+      
+  # 대시보드
+  dashboard:
+    enabled: true
+    port: 8080
+    refresh_interval: 5  # 초
+    auth_required: false
+
+# 개발 및 디버그 설정
+debug:
+  enabled: false
+  save_requests: false
+  save_responses: false
+  screenshot_on_error: false
+  verbose_logging: false
+  
+  # 테스트 모드
+  test_mode:
+    enabled: false
+    mock_responses: false
+    dry_run: false  # 실제 요청 없이 시뮬레이션만
+
+# 캐싱 설정
+cache:
+  enabled: true
+  ttl: 300  # 5분
+  max_size: 100  # 최대 캐시 항목 수
+  
+  # 캐시 대상
+  cache_targets:
+    - "available_dates"
+    - "service_list"
+    - "center_info"
+
+# 백업 및 복구
+backup:
+  enabled: true
+  interval_hours: 6
+  retention_days: 7
+  backup_path: "./backups"
+  
+  # 백업 대상
+  backup_targets:
+    - "session_data"
+    - "user_preferences"
+    - "logs"
+
