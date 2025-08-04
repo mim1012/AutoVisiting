@@ -17,6 +17,7 @@ from stealth_browser import StealthBrowser
 from profile_manager import ConfigManager
 from ticketing_strategy import TicketingStrategy, G4KTicketingMode
 from adaptive_calendar_refresher import AdaptiveCalendarRefresher
+from optimized_ticketing_flow import OptimizedTicketingFlow, enhanced_ticketing_execution
 
 logger = logging.getLogger(__name__)
 
@@ -126,69 +127,34 @@ class G4KTicketingAutomation:
             self._fallback_strategy()
     
     def _rapid_war_click(self) -> bool:
-        """전투 클릭 - 최고속"""
+        """전투 클릭 - 최적화된 플로우 사용"""
         logger.info("⚔️ 전투 시작!")
         
-        # JavaScript 기반 초고속 감지 및 클릭
-        war_script = """
-        var warInterval = setInterval(function() {
-            // 모든 날짜 찾기
-            var dates = document.querySelectorAll(
-                'td.available:not(.disabled), ' +
-                'td[data-handler="selectDay"]:not(.ui-state-disabled), ' +
-                'td.selectable:not(.disabled)'
-            );
-            
-            if (dates.length > 0) {
-                // 첫 번째 날짜 즉시 클릭
-                dates[0].click();
-                clearInterval(warInterval);
-                
-                // 성공 플래그
-                window.ticketingSuccess = true;
-            }
-        }, 50); // 50ms마다 체크
-        
-        // 10초 후 자동 중지
-        setTimeout(function() {
-            clearInterval(warInterval);
-        }, 10000);
-        """
-        
         try:
-            # 스크립트 실행
-            self.driver.execute_script(war_script)
+            # 프로필에서 여권번호 가져오기
+            profile = self.config_manager.profile_manager.get_active_profile()
+            if not profile:
+                logger.error("활성 프로필이 없습니다")
+                return False
             
-            # 결과 대기 (최대 10초)
-            for i in range(100):
-                try:
-                    success = self.driver.execute_script("return window.ticketingSuccess || false")
-                    if success:
-                        logger.info("🎯 날짜 클릭 성공!")
-                        return True
-                except:
-                    pass
-                time.sleep(0.1)
+            passport_number = profile.get('id_number', '')
+            if not passport_number:
+                logger.error("여권번호가 설정되지 않았습니다")
+                return False
             
-            return False
+            # 최적화된 플로우 실행
+            success = enhanced_ticketing_execution(self.driver, passport_number)
+            
+            return success
             
         except Exception as e:
-            logger.error(f"전투 클릭 실패: {e}")
+            logger.error(f"전투 실행 실패: {e}")
             return False
     
     def _handle_success(self):
         """성공 처리"""
-        print("\n" + "🎉"*20)
-        print("🏆 예약 전쟁 승리! 🏆")
-        print("🎉"*20)
-        
-        # 여권번호 자동 입력
-        time.sleep(1)
-        if self._fill_passport():
-            print("✅ 여권번호 입력 완료!")
-        
-        print("\n⚡ 나머지 단계를 빠르게 진행하세요!")
-        print("="*60)
+        # 최적화된 플로우에서 이미 처리됨
+        pass
     
     def _fill_passport(self) -> bool:
         """여권번호 빠른 입력"""

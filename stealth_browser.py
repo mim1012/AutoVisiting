@@ -86,7 +86,7 @@ class StealthBrowser:
         
         return driver
     
-    def _create_undetected_driver(self) -> uc.Chrome:
+    def _create_undetected_driver(self):
         """Undetected ChromeDriver 생성"""
         options = uc.ChromeOptions()
         

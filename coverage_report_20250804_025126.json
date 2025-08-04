@@ -1,0 +1,83 @@
+{
+  "timestamp": "2025-08-04T02:51:26.277750",
+  "code_analysis": {
+    "files_analyzed": 26,
+    "total_functions": 457,
+    "total_classes": 49,
+    "complexity_analysis": {
+      "average_complexity": 43.58,
+      "total_complexity": 1133,
+      "complexity_distribution": {
+        "HIGH": 18,
+        "VERY_HIGH": 7,
+        "MEDIUM": 1
+      },
+      "high_complexity_files": [
+        "adaptive_calendar_refresher.py",
+        "auto_input_handler.py",
+        "calendar_refresher.py",
+        "cancellation_hunter.py",
+        "config_manager_cli.py",
+        "extreme_bypass_demo.py",
+        "g4k_http_automation.py",
+        "g4k_hybrid_automation.py",
+        "g4k_hybrid_automation_v2.py",
+        "gui_manager.py",
+        "http_analyzer.py",
+        "human_like_fast_refresher.py",
+        "multi_profile_ticketing.py",
+        "optimized_ticketing_flow.py",
+        "profile_manager.py",
+        "safe_test_suite.py",
+        "server_overload_strategy.py",
+        "simple_test_runner.py",
+        "stealth_browser.py",
+        "test_coverage_analyzer.py",
+        "test_scenarios.py",
+        "test_suite.py",
+        "ticketing_strategy.py",
+        "ultra_lag_bypass.py",
+        "web_dashboard.py"
+      ]
+    }
+  },
+  "test_coverage": {
+    "test_files_count": 5,
+    "test_functions_count": 24,
+    "tested_modules": [
+      "multi_profile_ticketing",
+      "datetime",
+      "cancellation_hunter",
+      "adaptive_calendar_refresher",
+      "stealth_browser",
+      "profile_manager",
+      "ultra_lag_bypass",
+      "typing",
+      "server_overload_strategy"
+    ],
+    "tested_module_count": 9,
+    "total_modules": 26,
+    "estimated_coverage": 34.6,
+    "coverage_level": "POOR"
+  },
+  "quality_metrics": {
+    "individual_scores": {
+      "structure": 20,
+      "testing": 15,
+      "documentation": 20,
+      "configuration": 10
+    },
+    "total_score": 65,
+    "max_score": 100,
+    "grade": "C",
+    "percentage": 65
+  },
+  "recommendations": [
+    "테스트 커버리지가 낮습니다. 단위 테스트를 추가하세요.",
+    "복잡도가 높은 파일들을 리팩토링하세요: adaptive_calendar_refresher.py, auto_input_handler.py, calendar_refresher.py",
+    "평균 복잡도가 높습니다. 함수를 더 작은 단위로 분리하세요.",
+    "CI/CD 파이프라인에서 자동 테스트를 설정하세요.",
+    "코드 품질 도구(예: pylint, black)를 사용하세요.",
+    "정기적으로 테스트를 실행하여 회귀를 방지하세요."
+  ]
+}
